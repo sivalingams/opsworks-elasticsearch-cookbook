@@ -10,4 +10,4 @@ cookbook 'python', '>= 1.4.6', git: 'git://github.com/poise/python.git', tag: 'v
 cookbook 'rsyslog', '>= 2.1.0', git: 'git://github.com/opscode-cookbooks/rsyslog.git', tag: 'v2.1.0'
 cookbook 'yum', git: 'git://github.com/opscode-cookbooks/yum.git', tag: 'v3.6.3'
 cookbook 'yum-epel', '>= 0.3.6', git: 'git://github.com/opscode-cookbooks/yum-epel.git', tag: 'v0.3.6'
-cookbook 'elasticsearch', git: 'git://github.com/elasticsearch/cookbook-elasticsearch.git', tag: '1.0.0'
+cookbook 'elasticsearch', git: 'git://github.com/elasticsearch/cookbook-elasticsearch.git', tag: 'v0.3.14'
