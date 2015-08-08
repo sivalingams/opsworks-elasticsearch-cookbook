@@ -1,3 +1,4 @@
+# Encoding: utf-8
 name                'layer-custom'
 maintainer          ''
 maintainer_email    'ssivalngm+git [at] gmaxx [dot] com'
