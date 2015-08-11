@@ -4,22 +4,19 @@ node[:deploy].each do |application, deploy|
 
   next unless deploy[:application_type] == 'rails' && node[:opsworks][:instance][:layers].include?('rails-app')
 
-  if node[:deploy][application][:elasticsearch].present? && node[:deploy][application][:elasticsearch][:hosts].present?
+  template "#{node[:deploy][application][:deploy_to]}/shared/config/elasticsearch.yml" do
+    source "elasticsearch.yml.erb"
+    mode "0660"
+    owner node[:deploy][application][:user]
+    group node[:deploy][application][:group]
 
-    # Create elasticsearch.yml
-    template "#{node[:deploy][application][:deploy_to]}/shared/config/elasticsearch.yml" do
-      source "elasticsearch.yml.erb"
-      mode "0660"
-      owner node[:deploy][application][:user]
-      group node[:deploy][application][:group]
+    variables(
+      :hosts => node[:deploy][application][:elasticsearch][:hosts]
+    )
 
-      variables(
-        :hosts => node[:deploy][application][:elasticsearch][:hosts]
-      )
+    only_if do
+      node[:deploy][application][:elasticsearch].present? && node[:deploy][application][:elasticsearch][:hosts].present?
     end
-
-    # Create Symlink
-    # node.default[:deploy][application][:symlink_before_migrate] = node[:deploy][application][:symlink_before_migrate].merge({"config/elasticsearch.yml" => "config/elasticsearch.yml"})
   end
 
 end
