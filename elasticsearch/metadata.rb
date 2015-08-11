@@ -1,5 +1,5 @@
 # Encoding: utf-8
-name                'layer-custom'
+name                'elasticsearch'
 maintainer          ''
 maintainer_email    'ssivalngm+git [at] gmaxx [dot] com'
 license             'All rights reserved'

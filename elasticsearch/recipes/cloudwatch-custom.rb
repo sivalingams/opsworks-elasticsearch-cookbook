@@ -1,5 +1,5 @@
 # Create script that pushes custom metrics into Cloudwatch
-# 
+#
 template "/usr/local/bin/cloudwatch-custom.sh" do
   source "elasticsearch.cloudwatch-custom.sh.erb"
   mode "0550"
@@ -15,4 +15,3 @@ cron "cloudwatch-custom" do
   weekday "*"
   command "/usr/local/bin/cloudwatch-custom.sh"
 end
- 

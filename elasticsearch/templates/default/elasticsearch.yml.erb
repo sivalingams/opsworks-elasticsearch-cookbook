@@ -1,0 +1,7 @@
+<% ['development', 'staging', 'production'].each do |env| %>
+<%= env %>:
+  :hosts:
+  <% @hosts.each do |host| %>
+    - <%= host %>
+  <% end %>
+<% end %>
