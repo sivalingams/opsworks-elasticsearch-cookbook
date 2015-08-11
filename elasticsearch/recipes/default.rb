@@ -19,7 +19,7 @@ node[:deploy].each do |application, deploy|
     end
 
     # Create Symlink
-    node.normal[:deploy][application][:symlink_before_migrate].merge!({"config/elasticsearch.yml" => "config/elasticsearch.yml"})
+    node.default[:deploy][application][:symlink_before_migrate].merge!({"config/elasticsearch.yml" => "config/elasticsearch.yml"})
   end
 
 end
