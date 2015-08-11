@@ -4,6 +4,13 @@ node[:deploy].each do |application, deploy|
 
   next unless deploy[:application_type] == 'rails' && node[:opsworks][:instance][:layers].include?('rails-app')
 
+  elasticsearch_hosts = []
+  if node[:opsworks][:layers][:elasticsearch].present?
+    node[:opsworks][:layers][:elasticsearch][:instances].each do |instance_name, instance_config|
+      elasticsearch_hosts << "#{instance_config[:private_dns_name]}:9200"
+    end
+  end
+
   template "#{node[:deploy][application][:deploy_to]}/shared/config/elasticsearch.yml" do
     source "elasticsearch.yml.erb"
     mode "0660"
@@ -11,12 +18,8 @@ node[:deploy].each do |application, deploy|
     group node[:deploy][application][:group]
 
     variables(
-      :hosts => node[:deploy][application][:elasticsearch][:hosts]
+      :hosts => elasticsearch_hosts
     )
-
-    only_if do
-      node[:deploy][application][:elasticsearch].present? && node[:deploy][application][:elasticsearch][:hosts].present?
-    end
   end
 
 end
